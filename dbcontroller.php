@@ -2,8 +2,8 @@
 class DBController {
     private $host = "localhost";
     private $user = "root";
-    private $password = "password";
-    private $database = "SeniorProjectDatabase";
+    private $password = "";
+    private $database = "";
     private $conn;
 
     function __construct() {
@@ -56,4 +56,5 @@ class DBController {
             return $result;
         }
     }
+
 }
