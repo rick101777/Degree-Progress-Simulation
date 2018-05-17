@@ -31,8 +31,8 @@
             </label>
           </div>
           <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Sign in</button>
-        </form>
-        <a href = "/MyPHP/DatabaseConnection.php">beta</a>
+          <a href = "CourseSearchPage.php">Course Search Beta</a>
+        </form> 
     </div>
   </div>
   </body>
