@@ -8610,12 +8610,13 @@ readers do not read off random characters that represent icons */
 
 .navbar {
   margin-bottom: 0; }
-  .navbar a {
-    color: #ffffff !important; }
+  .navbar .black {
+    color: black; }
 
 .showcase {
   background: url(../img/dpbg.jpg) no-repeat 0 -100px;
-  height: 400px;
+  background-size: cover;
+  height: 600px;
   padding: 30px 0; }
   .showcase h1 {
     font-size: 60px; }
@@ -8634,6 +8635,7 @@ readers do not read off random characters that represent icons */
 
 .title-bar {
   background: url(../img/dpbg.jpg) no-repeat 0 -300px;
+  background-size: cover;
   color: #fff;
   border-bottom: 4px solid #005EB8; }
   .title-bar h1 {
@@ -8648,9 +8650,51 @@ readers do not read off random characters that represent icons */
 .panel-heading h4 {
   color: #ffffff !important; }
 
+.img-container .col-md-8 {
+  background: url(../img/dpbg.jpg) no-repeat;
+  background-size: cover;
+  height: 1024px; }
+
+.a-img-container .col-md-8 {
+  background: url(../img/a_dpbg.jpg) no-repeat;
+  background-size: cover;
+  height: 1024px; }
+
+.f-img-container .col-md-8 {
+  background: url(../img/f_dpbg.jpg) no-repeat;
+  background-size: cover;
+  height: 1024px; }
+
+.log .col-md-3 .divider {
+  width: 50px;
+  display: inline-block; }
+
+.search_bar {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  float: right; }
+  .search_bar form input {
+    width: 400px; }
+
+.space {
+  margin-top: 15px; }
+
+.space-2 {
+  margin-bottom: 15px; }
+
+.space-3 {
+  height: 500px; }
+
+.box {
+  width: 50%;
+  margin: auto;
+  border: 1px solid black;
+  padding: 10px; }
+
 footer {
-  padding: 50px 30px 30px 30px;
+  padding: 140px 30px 30px 30px;
   background: #004485;
-  color: #ffffff !important; }
+  color: #ffffff !important;
+  hight: 100%; }
 
 /*# sourceMappingURL=app.css.map */

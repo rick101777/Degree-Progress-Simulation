@@ -27,8 +27,8 @@
       <div class="space-3"></div>
     </form>
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
   </body>
 </html>
-<?php require_once ("footer.php"); ?>
+<?php require_once ("../footer.php"); ?>
