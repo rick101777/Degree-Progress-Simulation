@@ -18,8 +18,12 @@
         <label>Concentration</label>
         <select class="form-control">
           <option>Select Concentration</option>
-          <option>Computer Science</option>
-          <option>Information Systems</option>
+          <option>CSC: Standard</option>
+          <option>IS: Standard</option>
+          <option>IS: Business Analysis/Systems Analysis</option>
+          <option>IS: Business Intelligence</option>
+          <option>IS: Database Administration</option>
+          <option>IS: IT Enterprise Management</option>
         </select>
         <div class="space-2"></div>
         <button type="submit" class="btn btn-primary" name="submit">Submit</button>
