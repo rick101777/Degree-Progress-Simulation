@@ -1,14 +1,15 @@
 .navbar{
   margin-bottom: 0;
-  a{
-    color: set-text-color($main-color) !important;
+  .black{
+    color: black;
   }
 }
 
+
 .showcase{
   background: url(../img/dpbg.jpg) no-repeat 0 -100px;
-  background-size: 100%;
-  height: 400px;
+  background-size: cover;
+  height: 600px;
   padding: 30px 0;
 
   h1{
@@ -35,7 +36,7 @@
 
 .title-bar{
   background: url(../img/dpbg.jpg) no-repeat 0 -300px;
-  background-size: 100%;
+  background-size: cover;
   color: #fff;
   border-bottom: 4px solid $main-color;
 
@@ -60,14 +61,75 @@
 }
 
 .img-container{
-  margin-left: -50px;
-img{
+.col-md-8{
+  background: url(../img/dpbg.jpg) no-repeat;
+  background-size: cover;
+  height: 1024px;
+}
 
 }
 
+.a-img-container{
+.col-md-8{
+  background: url(../img/a_dpbg.jpg) no-repeat;
+  background-size: cover;
+  height: 1024px;
+}
+
+}
+
+.f-img-container{
+.col-md-8{
+  background: url(../img/f_dpbg.jpg) no-repeat;
+  background-size: cover;
+  height: 1024px;
+}
+
+}
+
+.log{
+  .col-md-3{
+    .divider{
+      width: 50px;
+      display: inline-block;
+      }
+    }
+  }
+.search_bar{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  float: right;
+  form{
+    input{
+      width: 400px;
+    }
+  }
+}
+
+.space{
+  margin-top: 15px;
+}
+
+.space-2{
+  margin-bottom: 15px;
+}
+.space-3{
+  height: 500px;
+}
+
+.space-4{
+  height: 50px;
+}
+
+.box{
+  width: 50%;
+  margin: auto;
+  border:1px solid black;
+  padding: 10px;
 }
 footer{
-  padding: 50px 30px 30px 30px;
+  padding: 140px 30px 30px 30px;
   background: darken($main-color, 10%);
   color: set-text-color($main-color) !important;
+  hight: 100%;
 }

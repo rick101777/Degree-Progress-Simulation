@@ -11,28 +11,25 @@
 
   <body>
     <div class="img-container">
-      <div class="col-md-8 margin-left">
-        <img src="img/dpbg.jpg"width="800px" height="720px">
+      <div class="col-md-8">
+
       </div>
     </div>
     <div class="log">
       <div class="col-md-3">
-        <form class="form-signin" action="includes/login.inc.php" method="POST">
+        <form class="form-signin" action="includes/log.inc.php" method="POST">
           <img class="mb-4" src="img/dp_ban.jpg" width="300px">
-          <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+          <h1 class="h3 mb-3 font-weight-normal">User Login</h1>
           <label for="inputEmail" class="sr-only">Email address</label>
           <input type="email" name="mail" class="form-control" placeholder="Email address" required autofocus>
           </br>
           <label for="inputPassword" class="sr-only">Password</label>
           <input type="password" name="pwd" class="form-control" placeholder="Password" required>
-          <div class="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
-          </div>
+          <br>
           <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Sign in</button>
           <a href = "CourseSearchPage.php">Course Search Beta</a>
         </form> 
+
     </div>
   </div>
   </body>

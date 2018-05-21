@@ -19,7 +19,7 @@
             <p>Vestibulum neque erat, semper elementum justo posuere, porta eleifend quam. Cras viverra ultricies lacinia. Nulla elementum ligula sed nunc finibus commodo. Curabitur efficitur velit mauris, pulvinar volutpat tortor egestas commodo. Praesent eget ante commodo, iaculis </p>
             <a href="progress.php" class="btn btn-primary">GO!</a>
           </div>
-          
+
           <div class ="col-md-4">
             <i class="fas fa-id-card"></i>
             <h3>Profile</h3>
@@ -37,8 +37,8 @@
       </div>
     </div>
 
-    <?php require_once ("footer.php"); ?>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+    <?php require_once ("../footer.php"); ?>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
   </body>
 </html>
