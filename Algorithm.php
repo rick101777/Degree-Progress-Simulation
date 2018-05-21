@@ -11,10 +11,9 @@
 		private $Location;
 		private $Prereq = array();
 		// Next Course, For LinkedList Use
-		public $Next;
+		public $Next = NULL;
 
 		public function __construct(){
-			$this->Next = NULL;
 		}
 
 /*------------------------------Setter Methods--------------------------------------------------------------*/
