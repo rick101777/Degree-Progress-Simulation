@@ -68,9 +68,11 @@
 
 		public function Push($Object){
 			array_unshift($this->Stack, $Object);
+			$this->Count++;
 		}
 
 		public function Pop(){
+			$this->Count--;
 			return array_shift($this->Stack);
 		}
 
@@ -81,7 +83,7 @@
 	}
 
 	class LinkedList{
-		private $root;
+		public $root;
 		private $count;
 
 		public function __construct(){
@@ -89,15 +91,23 @@
 			$this->count = 0;
 		}
 
-		public function Insert($Node){
-			if ($this->root == NULL){
-				$this->root = $Node;
-				$this->count++;
+		public function InsertFirst($Node){
+			if ($this->root !== NULL){
+				$this->root->Next = $Node;
 			}
-			else{
+
+			$this->root = $Node;
+			$this->count++;
+		}
+
+
+		public function Insert($Node){
+			if ($this->root === NULL){
+				$this->InsertFirst($Node);
+			}else{
 				$current = $this->root;
-				while($current->Next != NULL){
-					$current = $current->Next;
+				for ($current = $this->root; $current->Next !== NULL; $current = $current->Next){
+					
 				}
 				$current->Next = $Node;
 				$this->count++;
@@ -150,7 +160,9 @@
 				$Node = $CourseData[$i];
 				$LinkedList = new LinkedList();
 				$LinkedList->Insert($Node);
-				$PrereqSize = count($Node->getPrereqArray()) - 1;
+				$PrereqSize = count($Node->getPrereqArray());
+				echo $PrereqSize;
+				echo "<br>";
 				for ($j = 0; $j < $PrereqSize; $j++){
 					$NodePrereq = $Node->getPrereqArray();
 					$PrereqNodeIndex = $this->BinarySearch($CourseData, $Node->getPrereqArray()[$j]);
@@ -183,7 +195,7 @@
 
 
 			$NodeArray = array();
-			for ($i = 0; $i < 12; $i++){
+			for ($i = 0; $i < 6; $i++){
 				$CourseID = $result[$i]['COURSE_ID'];
 				$Subject = $result[$i]['SUBJECT'];
 				$Title = $result[$i]['TITLE'];
@@ -199,20 +211,19 @@
 			// Adds Prereq Information Since the database does not have that info yet.
 			for ($i = 0; $i < count($NodeArray); $i++){
 				$RawNode = $NodeArray[$i];
-				if ($RawNode->getCourseID() == 1488){
-					$RawNode->addPrereq(1490);
-					$RawNode->addPrereq(6380);
+				if ($RawNode->getCourseID() == 1469){
+					$RawNode->addPrereq(1489);
 				}
 				if ($RawNode->getCourseID() == 1485){
-					$RawNode->addPrereq(1513);
+					$RawNode->addPrereq(1488);
+
+				}
+				if ($RawNode->getCourseID() == 1488){
+					$RawNode->addPrereq(1490);
 				}
 				if ($RawNode->getCourseID() == 1489){
-					$RawNode->addPrereq(1490);
+					$RawNode->addPrereq(1485);
 					$RawNode->addPrereq(1470);
-				}
-				if ($RawNode->getCourseID() == 6379){
-					$RawNode->addPrereq(6384);
-					$RawNode->addPrereq(1488);
 				}
 			}
 			return $NodeArray;
@@ -235,39 +246,81 @@
 	class Graph{
 
 		private $AdjacencyList;
+		private $Count;
 
 		public function __construct($AdjacencyList){
 			$this->AdjacencyList = $AdjacencyList;
+			$this->Count = count($AdjacencyList->getAdjacencyList());
 		}
 
 
 		public function TopologicalSort(){
+			$Stack = new Stack();
 
+			$Visited = array();
+			for ($i = 0; $i < $this->Count; $i++){
+				$Visited[$i] = FALSE;
+			}
+
+			for ($i = 0; $i < $this->Count; $i++){
+				if ($Visited[$i] == FALSE){
+					$this->TopologicalSortHelper($i, $Visited, $Stack);
+				}
+			}
+
+			$Numbered = 0;
+			while(!$Stack->isEmpty()){
+				echo "". $Numbered. ", ";
+				print_r($Stack->Pop());
+				echo "<br><br>";
+				$Numbered++;
+			}
+
+		}
+
+		public function Find($Node){
+			$Array = $this->AdjacencyList->getAdjacencyList();
+			$LowIndex = 0;
+			$HighIndex = $this->Count-1;
+			while ($LowIndex <= $HighIndex){
+				$mid = (int)(($LowIndex+$HighIndex)/2);
+				if (intval($Array[$mid]->root->getCourseID()) == intval($Node->getCourseID())){
+					return $mid;
+				}
+				if (intval($Array[$mid]->root->getCourseID()) < intval($Node->getCourseID())){
+					$LowIndex = $mid + 1;
+				}else{
+					$HighIndex = $mid -1;
+				}
+			}
+		}
+
+		public function TopologicalSortHelper($Index, $Visited, $Stack){
+			$Visited[$Index] = TRUE;
+
+			$Node = $this->AdjacencyList->getAdjacencyList()[$Index]->root;
+			while ($Node->Next != NULL){
+				$Node = $Node->Next;
+				$Index = $this->Find($Node);
+				if ($Visited[$Index] == FALSE){
+					$this->TopologicalSortHelper($Index, $Visited, $Stack);
+				}
+			}
+			$Stack->Push($Node);
+			
 		}
 
 	}
 
 
+	//$CourseDataRetriver = new CourseDataRetriver();
+	//$Data = $CourseDataRetriver->Fetch();
+	//$CourseDataRetriver->toString($Data);
+	$adjacencyList = new AdjacencyList();
+	$adjacencyList->BuildAdjacencyList();
+	//print_r($adjacencyList->getAdjacencyList());
 
-	//$adjacencyList = new AdjacencyList();
-	//$adjacencyList->BuildAdjacencyList();
-	//print_r($adjacencyList->getAdjacencyList()[0]);
-
-
-	$Stack = new Stack();
-
-	$Stack->Push("Hello");
-	$Stack->Push("Bye");
-	$Stack->Push("Tie Die");
-
-	$Result = $Stack->Pop();
-	echo $Result;
-	echo "<br><br>";
-	$Result = $Stack->Pop();
-	echo $Result;
-	echo "<br><br>";
-	$Result = $Stack->Pop();
-	echo $Result;
-	echo "<br><br>";
+	//$Graph = new Graph($adjacencyList);
+	//$Graph->TopologicalSort();
 
 ?>
