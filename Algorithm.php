@@ -92,14 +92,24 @@
 		}
 
 		public function InsertFirst($Node){
-			$Node->Next = $this->first;
-			$this->first = &$Node;
+			$NewNode = new Course();
+			$NewNode->setCourseID($Node->getCourseID());
+			$NewNode->setSubject($Node->getSubject());
+			$NewNode->setTitle($Node->getTitle());
+			$NewNode->setLocation($Node->getLocation());
+			$NewNode->Next = $this->first;
+			$this->first = &$NewNode;
 			$this->Count++;
 		}
 
 
 		public function Insert($Node){
 			if ($this->first != Null){
+				$NewNode = new Course();
+				$NewNode->setCourseID($Node->getCourseID());
+				$NewNode->setSubject($Node->getSubject());
+				$NewNode->setTitle($Node->getTitle());
+				$NewNode->setLocation($Node->getLocation());
 				$this->first->Next = &$Node;
 				$this->Count++;
 			}
@@ -149,16 +159,9 @@
 				$LinkedList = new LinkedList();
 				$LinkedList->Insert($Node);
 				$PrereqSize = count($Node->getPrereqArray());
-				//echo $PrereqSize;
-				//echo "<br>";
 				$NodePrereq = $Node->getPrereqArray();
-				print_r($NodePrereq);
-				echo $PrereqSize;
-				echo "<br>";
 				for ($j = 0; $j < $PrereqSize; $j++){
 					$PrereqNodeIndex = $this->Search($CourseData, $NodePrereq[$j]);
-					//echo $PrereqNodeIndex;
-					//echo "<br><br>";
 
 					if ($PrereqNodeIndex != -1){
 						$LinkedList->Insert($CourseData[intval($PrereqNodeIndex)]);
@@ -296,8 +299,6 @@
 				}
 			}
 			$Stack->Push($Node);
-			print_r($Visited);
-			echo "<br>";
 		}
 
 	}
@@ -308,10 +309,10 @@
 	//$CourseDataRetriver->toString($Data);
 	$adjacencyList = new AdjacencyList();
 	$adjacencyList->BuildAdjacencyList();
-	print_r($adjacencyList->getAdjacencyList());
+	//print_r($adjacencyList->getAdjacencyList()[4]);
 	//var_dump($adjacencyList->getAdjacencyList()[0]->first);
-	//$Graph = new Graph($adjacencyList);
-	//$Graph->TopologicalSort();
+	$Graph = new Graph($adjacencyList);
+	$Graph->TopologicalSort();
 
 
 ?>
