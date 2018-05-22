@@ -1,7 +1,5 @@
 <h1 style = "text-align: center;">Algorithm Beta</h1>
 <?php
-	include "dbcontroller.php";
-
 	// Node class for courses, with database table attributes.
 	class Course{
 		//Course Properties
@@ -54,6 +52,9 @@
 		public function getPrereqArray(){
 			return $this->Prereq;
 		}
+		public function getNext(){
+			return $this->Next;
+		}
 	}
 
 	class Stack{
@@ -82,39 +83,33 @@
 	}
 
 	class LinkedList{
-		public $root;
-		private $count;
+		public $first;
+		private $Count;
 
 		public function __construct(){
-			$this->root = NULL;
-			$this->count = 0;
+			$this->first = NULL;
+			$this->Count = 0;
 		}
 
 		public function InsertFirst($Node){
-			if ($this->root !== NULL){
-				$this->root->Next = $Node;
-			}
-
-			$this->root = $Node;
-			$this->count++;
+			$Node->Next = $this->first;
+			$this->first = &$Node;
+			$this->Count++;
 		}
 
 
 		public function Insert($Node){
-			if ($this->root === NULL){
+			if ($this->first != Null){
+				$this->first->Next = &$Node;
+				$this->Count++;
+			}
+			else{
 				$this->InsertFirst($Node);
-			}else{
-				$current = $this->root;
-				for ($current = $this->root; $current->Next !== NULL; $current = $current->Next){
-					
-				}
-				$current->Next = $Node;
-				$this->count++;
 			}
 		}
 
 		public function isEmpty(){
-			return $this->root == NULL;
+			return $this->first == NULL;
 		}
 
 	}
@@ -128,20 +123,14 @@
 		}
 
 		// Handles searching through the Course Nodes, and searches by COURSE_ID;
-		public function BinarySearch($CourseData, $StringCourseId){
-			$LowIndex = 0;
-			$HighIndex = count($CourseData)-1;
-			while ($LowIndex <= $HighIndex){
-				$mid = (int)(($LowIndex+$HighIndex)/2);
-				if (intval($StringCourseId) < intval($CourseData[$mid]->getCourseID())){
-					$LowIndex = $mid + 1;
-				}
-				if (intval($StringCourseId) == intval($CourseData[$mid]->getCourseID())){
-					return $mid;
-				}else{
-					$HighIndex = $mid -1;
+		public function Search($CourseData, $StringCourseId){
+			$n = count($CourseData);
+			for ($i = 0; $i < $n; $i++){
+				if ($CourseData[$i]->getCourseID() == intval($StringCourseId)){
+					return $i;
 				}
 			}
+			return -1;
 		}
 
 		// Handles the construction of the Adjacency List, by creating an array, which gets populated with
@@ -160,13 +149,20 @@
 				$LinkedList = new LinkedList();
 				$LinkedList->Insert($Node);
 				$PrereqSize = count($Node->getPrereqArray());
+				//echo $PrereqSize;
+				//echo "<br>";
+				$NodePrereq = $Node->getPrereqArray();
+				print_r($NodePrereq);
 				echo $PrereqSize;
 				echo "<br>";
 				for ($j = 0; $j < $PrereqSize; $j++){
-					$NodePrereq = $Node->getPrereqArray();
-					$PrereqNodeIndex = $this->BinarySearch($CourseData, $Node->getPrereqArray()[$j]);
+					$PrereqNodeIndex = $this->Search($CourseData, $NodePrereq[$j]);
+					//echo $PrereqNodeIndex;
+					//echo "<br><br>";
 
-					$LinkedList->Insert($CourseData[intval($PrereqNodeIndex)]);
+					if ($PrereqNodeIndex != -1){
+						$LinkedList->Insert($CourseData[intval($PrereqNodeIndex)]);
+					}
 				}
 				array_push($this->AdjacencyList, $LinkedList);
 			}
@@ -188,17 +184,18 @@
 		}
 		// Handles fetching the data from the database, and constructs an array of course nodes.
 		public function Fetch(){
-			$dbcontroller = new DBController();
-
-			$result = $dbcontroller->runQuery("SELECT * FROM t_courses WHERE LOCATION = 'LOOP' AND CONSENT = 'N'");
-
-
+			include ('includes/dbh.inc.php');
+			$result = mysqli_query($conn, "SELECT * FROM t_courses WHERE LOCATION = 'LOOP' AND CONSENT = 'N'");
+			$row = mysqli_fetch_all($result);
+			//print_r($row);
+			//$size = count($row);
 			$NodeArray = array();
 			for ($i = 0; $i < 6; $i++){
-				$CourseID = $result[$i]['COURSE_ID'];
-				$Subject = $result[$i]['SUBJECT'];
-				$Title = $result[$i]['TITLE'];
-				$Location = $result[$i]['LOCATION'];
+				$AccessedRow = $row[$i];
+				$CourseID = $AccessedRow[0];
+				$Subject = $AccessedRow[1];
+				$Title = $AccessedRow[3];
+				$Location = $AccessedRow[6];
 				$Node = new Course();
 				$Node->setCourseID($CourseID);
 				$Node->setSubject($Subject);
@@ -258,15 +255,15 @@
 
 			$Visited = array();
 			for ($i = 0; $i < $this->Count; $i++){
-				$Visited[$i] = FALSE;
+				$Visited[$i] = 0;
 			}
 
+			$Stack->Push($this->AdjacencyList->getAdjacencyList()[0]->first);
 			for ($i = 0; $i < $this->Count; $i++){
-				if ($Visited[$i] == FALSE){
+				if ($Visited[$i] == 0){
 					$this->TopologicalSortHelper($i, $Visited, $Stack);
 				}
 			}
-
 			$Numbered = 0;
 			while(!$Stack->isEmpty()){
 				echo "". $Numbered. ", ";
@@ -278,35 +275,29 @@
 		}
 
 		public function Find($Node){
-			$Array = $this->AdjacencyList->getAdjacencyList();
-			$LowIndex = 0;
-			$HighIndex = $this->Count-1;
-			while ($LowIndex <= $HighIndex){
-				$mid = (int)(($LowIndex+$HighIndex)/2);
-				if (intval($Array[$mid]->root->getCourseID()) == intval($Node->getCourseID())){
-					return $mid;
-				}
-				if (intval($Array[$mid]->root->getCourseID()) < intval($Node->getCourseID())){
-					$LowIndex = $mid + 1;
-				}else{
-					$HighIndex = $mid -1;
+			for ($i = 0; $i < $this->Count; $i++){
+				if ($Node->getCourseID() == $this->AdjacencyList->getAdjacencyList()[$i]->first->getCourseID()){
+					return $i;
 				}
 			}
+			return -1;
 		}
 
 		public function TopologicalSortHelper($Index, $Visited, $Stack){
-			$Visited[$Index] = TRUE;
-
-			$Node = $this->AdjacencyList->getAdjacencyList()[$Index]->root;
+			$Visited[$Index] = 1;
+			$Node = $this->AdjacencyList->getAdjacencyList()[$Index]->first;
 			while ($Node->Next != NULL){
 				$Node = $Node->Next;
-				$Index = $this->Find($Node);
-				if ($Visited[$Index] == FALSE){
-					$this->TopologicalSortHelper($Index, $Visited, $Stack);
+				$nextIndex = $this->Find($Node);
+				if ($Visited[$nextIndex] == 0){
+					echo "CourseID : ". $Node->getCourseID(0). ", Index: ". $nextIndex . ", ArrayValue: ". $this->AdjacencyList->getAdjacencyList()[$nextIndex]->first->getCourseID();
+					echo "<br>";
+					$this->TopologicalSortHelper($nextIndex, $Visited, $Stack);
 				}
 			}
 			$Stack->Push($Node);
-			
+			print_r($Visited);
+			echo "<br>";
 		}
 
 	}
@@ -317,9 +308,10 @@
 	//$CourseDataRetriver->toString($Data);
 	$adjacencyList = new AdjacencyList();
 	$adjacencyList->BuildAdjacencyList();
-	//print_r($adjacencyList->getAdjacencyList());
-
+	print_r($adjacencyList->getAdjacencyList());
+	//var_dump($adjacencyList->getAdjacencyList()[0]->first);
 	//$Graph = new Graph($adjacencyList);
 	//$Graph->TopologicalSort();
+
 
 ?>

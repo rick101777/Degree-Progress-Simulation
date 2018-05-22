@@ -27,7 +27,7 @@
           <input type="password" name="pwd" class="form-control" placeholder="Password" required>
           <br>
           <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Sign in</button>
-          <a href = "CourseSearchPage.php">Course Search Beta</a>
+          <a href = "Algorithm.php">Course Search Beta</a>
         </form> 
 
     </div>

@@ -3,6 +3,6 @@
 $dbServername="localhost";
 $dbEmail="root";
 $dbPassword="";
-$dbName="senior_project_database";
+$dbName="seniorprojectdatabase";
 
 $conn= mysqli_connect($dbServername, $dbEmail, $dbPassword, $dbName);
