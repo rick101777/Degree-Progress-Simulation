@@ -73,7 +73,7 @@
 
 		public function Pop(){
 			$this->Count--;
-			return array_shift($this->Stack);
+			return array_pop($this->Stack);
 		}
 
 		public function isEmpty(){
@@ -211,18 +211,25 @@
 			for ($i = 0; $i < count($NodeArray); $i++){
 				$RawNode = $NodeArray[$i];
 				if ($RawNode->getCourseID() == 1469){
-					$RawNode->addPrereq(1489);
-				}
-				if ($RawNode->getCourseID() == 1485){
-					$RawNode->addPrereq(1488);
-
-				}
-				if ($RawNode->getCourseID() == 1488){
 					$RawNode->addPrereq(1490);
 				}
-				if ($RawNode->getCourseID() == 1489){
+				if ($RawNode->getCourseID() == 1470){
+					$RawNode->addPrereq(1488);
+					$RawNode->addPrereq(1489);
+
+				}
+				if ($RawNode->getCourseID() == 1485){
+					$RawNode->addPrereq(1470);
+				}
+				if ($RawNode->getCourseID() == 1488){
 					$RawNode->addPrereq(1485);
 					$RawNode->addPrereq(1470);
+				}
+				if ($RawNode->getCourseID() == 1489){
+
+				}
+				if ($RawNode->getCourseID() == 1490){
+					$RawNode->addPrereq(1485);
 				}
 			}
 			return $NodeArray;
@@ -258,15 +265,17 @@
 
 			$Visited = array();
 			for ($i = 0; $i < $this->Count; $i++){
-				$Visited[$i] = 0;
+				Array_push($Visited, 0);
 			}
 
-			$Stack->Push($this->AdjacencyList->getAdjacencyList()[0]->first);
 			for ($i = 0; $i < $this->Count; $i++){
 				if ($Visited[$i] == 0){
 					$this->TopologicalSortHelper($i, $Visited, $Stack);
 				}
 			}
+
+			print_r($Visited);
+			echo "<br>";
 			$Numbered = 0;
 			while(!$Stack->isEmpty()){
 				echo "". $Numbered. ", ";
@@ -286,19 +295,26 @@
 			return -1;
 		}
 
-		public function TopologicalSortHelper($Index, $Visited, $Stack){
+		public function TopologicalSortHelper($Index, &$Visited, $Stack){
 			$Visited[$Index] = 1;
+
+
 			$Node = $this->AdjacencyList->getAdjacencyList()[$Index]->first;
+			$Stack->Push($Node);
 			while ($Node->Next != NULL){
+				echo "Origin: ". $Node->getCourseID(). ", Future: ". $Node->Next->getCourseID();
+				echo "<br><br>";
 				$Node = $Node->Next;
 				$nextIndex = $this->Find($Node);
 				if ($Visited[$nextIndex] == 0){
-					echo "CourseID : ". $Node->getCourseID(0). ", Index: ". $nextIndex . ", ArrayValue: ". $this->AdjacencyList->getAdjacencyList()[$nextIndex]->first->getCourseID();
-					echo "<br>";
+					//echo "CourseID : ". $Node->getCourseID(0). ", Index: ". $nextIndex . ", ArrayValue: ". $this->AdjacencyList->getAdjacencyList()[$nextIndex]->first->getCourseID();
+					//echo "<br>";
+					print_r($Visited);
+					echo "<br><br>";
 					$this->TopologicalSortHelper($nextIndex, $Visited, $Stack);
 				}
 			}
-			$Stack->Push($Node);
+
 		}
 
 	}
