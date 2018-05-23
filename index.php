@@ -11,8 +11,8 @@
 
   <body>
     <div class="img-container">
-      <div class="col-md-8">
-
+      <div class="col-md-8" style="border: none;">
+        <img src="img/dpbg.jpg" height= 100% width = 100% >
       </div>
     </div>
     <div class="log">
