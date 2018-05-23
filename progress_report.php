@@ -15,7 +15,8 @@
         <div class="space"></div>
 
         <h2>Autumn 2018</h2>
-        <table class='table' border = '1'>
+    
+        <table class='table' border='1'>
             <tr>
             <th scope='col'>Course ID</th>
             <th scope='col'>Subject</th>
@@ -37,8 +38,22 @@
             </tr>
     
         </table>
+
+        <h2>Winter 2018</h2>
+
+        <table class='table'>
+    
+        <tr>
+    
+    <td><p class="course-item"> CSC321 </p></td>
+    <td><p class="course-item"> CSC501 </p></td>
+    <td><p class="course-item"> CSC602 </p></td>
+    <td><p class="course-item"> CSC401 </p></td>
         
-        <div class="space2"></div>
+        </tr>
+        
+        </table>
+    
         <button type="submit" class="btn btn-secondary" name="submit">Save Report</button>
     </body>
     
