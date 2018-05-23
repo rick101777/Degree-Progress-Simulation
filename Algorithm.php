@@ -325,7 +325,7 @@
 	//$CourseDataRetriver->toString($Data);
 	$adjacencyList = new AdjacencyList();
 	$adjacencyList->BuildAdjacencyList();
-	//print_r($adjacencyList->getAdjacencyList()[4]);
+    //print_r($adjacencyList->getAdjacencyList()[4]);
 	//var_dump($adjacencyList->getAdjacencyList()[0]->first);
 	$Graph = new Graph($adjacencyList);
 	$Graph->TopologicalSort();
