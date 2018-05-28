@@ -20,7 +20,7 @@ include ('../includes/dbh.inc.php');
 </html>
 
 <?php
-$query="SELECT ID, Email, FirstName, LastName, PID, Department, MajorList FROM population";
+$query="SELECT ID, Email, FirstName, LastName, PID, Department, MajorList FROM POPULATION";
 $result= mysqli_query($conn, $query);
 echo "<table class='table' border = '1'>";
 echo "<thead>";

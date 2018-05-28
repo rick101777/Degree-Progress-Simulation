@@ -10,7 +10,7 @@ $pid = mysqli_real_escape_string($conn, $_POST['pid']);
 $dept = mysqli_real_escape_string($conn, $_POST['dept']);
 $major = mysqli_real_escape_string($conn, $_POST['major']);
 
-$sql= "INSERT INTO population (ID, Email, Password, FirstName, LastName, PID, Department, MajorList) VALUES ('$id', '$email', '$pass', '$fname', '$lname', '$pid', '$dept', '$major')";
+$sql= "INSERT INTO POPULATION (ID, Email, Password, FirstName, LastName, PID, Department, MajorList) VALUES ('$id', '$email', '$pass', '$fname', '$lname', '$pid', '$dept', '$major')";
 mysqli_query($conn, $sql);
 header("Location: insert_user.php?insert=success");
  ?>
