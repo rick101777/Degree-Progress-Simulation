@@ -17,7 +17,7 @@ include ('../includes/dbh.inc.php');
 <?php
   if (isset($_POST['submit-search'])) {
     $search = mysqli_real_escape_string($conn, $_POST['search']);
-    $sql = "SELECT ID, Email, FirstName, LastName, PID, Department, MajorList FROM population WHERE ID LIKE '%$search%' OR Email LIKE '%$search%' OR FirstName LIKE '%$search%' OR LastName LIKE '%$search%' OR MajorList LIKE '%$search%' OR Department LIKE '%$search%' OR PID LIKE '%$search%'";
+    $sql = "SELECT ID, Email, FirstName, LastName, PID, Department, MajorList FROM POPULATION WHERE ID LIKE '%$search%' OR Email LIKE '%$search%' OR FirstName LIKE '%$search%' OR LastName LIKE '%$search%' OR MajorList LIKE '%$search%' OR Department LIKE '%$search%' OR PID LIKE '%$search%'";
     $result = mysqli_query($conn, $sql);
     $queryResult = mysqli_num_rows($result);
     if (empty($search)) {

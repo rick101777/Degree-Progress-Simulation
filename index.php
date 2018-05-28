@@ -12,7 +12,7 @@
   <body>
     <div class="img-container">
       <div class="col-md-8">
-
+        <img src="img/dpbg.jpg"width=100% height=80%>
       </div>
     </div>
     <div class="log">

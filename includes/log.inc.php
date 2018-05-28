@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     exit();
     }
     else{
-      $sql="SELECT * FROM population WHERE Email='$mail'";
+      $sql="SELECT * FROM POPULATION WHERE Email='$mail'";
       $result=mysqli_query($conn, $sql);
       $resultCheck=mysqli_num_rows($result);
       if ($resultCheck<1) {
