@@ -20,7 +20,7 @@ include ('../includes/dbh.inc.php');
 </html>
 
 <?php
-$query="SELECT ID, EMAIL, FNAME, LNAME, PID, DEPARTMENT, MAJOR FROM population";
+$query="SELECT ID, Email, FirstName, LastName, PID, Department, MajorList FROM POPULATION";
 $result= mysqli_query($conn, $query);
 echo "<table class='table' border = '1'>";
 echo "<thead>";
@@ -36,7 +36,7 @@ echo "</tr>";
 echo "</thead>";
 echo "<tbody>";
 while ($row=mysqli_fetch_assoc($result)) {
- echo "<tr><td>{$row['ID']}</td> <td>{$row['EMAIL']} </td> <td>{$row['FNAME']}</td> <td>{$row['LNAME']}</td> <td>{$row['PID']} </td> <td>{$row['DEPARTMENT']} </td> <td>{$row['MAJOR']}</td></tr>";
+ echo "<tr><td>{$row['ID']}</td> <td>{$row['Email']} </td> <td>{$row['FirstName']}</td> <td>{$row['LastName']}</td> <td>{$row['PID']} </td> <td>{$row['Department']} </td> <td>{$row['MajorList']}</td></tr>";
 }
 echo "</tbody>";
 echo "</table>";

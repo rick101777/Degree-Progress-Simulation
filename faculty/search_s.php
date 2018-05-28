@@ -17,7 +17,7 @@ include ('../includes/dbh.inc.php');
 <?php
   if (isset($_POST['submit-search'])) {
     $search = mysqli_real_escape_string($conn, $_POST['search']);
-    $sql = "SELECT ID, EMAIL, FNAME, LNAME, MAJOR FROM population WHERE PID='STU' AND (ID LIKE '%$search%' OR EMAIL LIKE '%$search%' OR FNAME LIKE '%$search%' OR LNAME LIKE '%$search%' OR MAJOR LIKE '%$search%')";
+    $sql = "SELECT ID, Email, FirstName, LastName, MajorList FROM POPULATION WHERE PID='STU' AND (ID LIKE '%$search%' OR Email LIKE '%$search%' OR FirstName LIKE '%$search%' OR LastName LIKE '%$search%' OR MajorList LIKE '%$search%')";
     $result = mysqli_query($conn, $sql);
     $queryResult = mysqli_num_rows($result);
     if (empty($search)) {
@@ -37,7 +37,7 @@ include ('../includes/dbh.inc.php');
       echo "</thead>";
       echo "<tbody>";
       while ($row=mysqli_fetch_assoc($result)) {
-       echo "<tr><td>{$row['ID']}</td> <td>{$row['EMAIL']} </td> <td>{$row['FNAME']}</td> <td>{$row['LNAME']}</td> <td>{$row['MAJOR']}</td></tr>";
+       echo "<tr><td>{$row['ID']}</td> <td>{$row['Email']} </td> <td>{$row['FirstName']}</td> <td>{$row['LastName']}</td> <td>{$row['MajorList']}</td></tr>";
       }
       echo "</tbody>";
       echo "</table>";
