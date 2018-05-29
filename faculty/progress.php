@@ -6,7 +6,7 @@
       <h1>Degree Progress Simulation</h1>
     </div>
     <div class="space"></div>
-    <form class="form-group">
+    <form class="form-group" action = "/AlgorithmStudentPreferences.php" method = "POST">
       <div class="box">
         <label>Major</label>
         <select class="form-control">
@@ -24,6 +24,17 @@
           <option>IS: Business Intelligence</option>
           <option>IS: Database Administration</option>
           <option>IS: IT Enterprise Management</option>
+        </select>
+      <br>
+        <label>Classes Per-Quarter</label>
+        <select class="form-control">
+          <option>Select Number of Courses Per Quarter</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
         </select>
         <div class="space-2"></div>
         <button type="submit" class="btn btn-primary" name="submit">Submit</button>

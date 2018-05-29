@@ -14,6 +14,6 @@ $winter = mysqli_real_escape_string($conn, $_POST['win']);
 $spring = mysqli_real_escape_string($conn, $_POST['spr']);
 $summer = mysqli_real_escape_string($conn, $_POST['sum']);
 
-$sql= "INSERT INTO t_courses (COURSE_ID, SUBJECT, CAT_NUMBER, TITLE, CONSENT, SUBJECT_DESC, LOCATION, PREREQ, AUTUMN, WINTER, SPRING, SUMMER) VALUES ('$cid', '$subject', '$cat', '$title', '$consent', '$subd', '$location', '$prereq', '$autumn', '$winter', '$spring', '$summer')";
+$sql= "INSERT INTO COURSES (COURSE_ID, SUBJECT, CAT_NUMBER, TITLE, CONSENT, SUBJECT_DESC, LOCATION, PREREQ, AUTUMN, WINTER, SPRING, SUMMER) VALUES ('$cid', '$subject', '$cat', '$title', '$consent', '$subd', '$location', '$prereq', '$autumn', '$winter', '$spring', '$summer')";
 mysqli_query($conn, $sql);
 header("Location: insert_class.php?insert=success");
