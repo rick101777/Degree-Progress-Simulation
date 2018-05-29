@@ -6,17 +6,17 @@
       <h1>Degree Progress Simulation</h1>
     </div>
     <div class="space"></div>
-    <form class="form-group" action = "/AlgorithmStudentPreferences.php" method = "POST">
+    <form class="form-group" action = "/AlgorithmDataRetriver.php" method = "POST">
       <div class="box">
         <label>Major</label>
-        <select class="form-control">
+        <select class="form-control" name = "Major">
           <option>Select Major</option>
           <option>Computer Science</option>
           <option>Information Systems</option>
         </select>
       </br>
         <label>Concentration</label>
-        <select class="form-control">
+        <select class="form-control" name = "Concentration">
           <option>Select Concentration</option>
           <option>CSC: Standard</option>
           <option>IS: Standard</option>
@@ -27,7 +27,7 @@
         </select>
       <br>
         <label>Classes Per-Quarter</label>
-        <select class="form-control">
+        <select class="form-control" name = "Quantity">
           <option>Select Number of Courses Per Quarter</option>
           <option>1</option>
           <option>2</option>
@@ -35,6 +35,13 @@
           <option>4</option>
           <option>5</option>
           <option>6</option>
+        </select>
+      <br>
+        <label>Class Location</label>
+        <select class = "form-control" name = "Location">
+          <option>Select Prefered Location</option>
+          <option>In-Person</option>
+          <option>Online</option>
         </select>
         <div class="space-2"></div>
         <button type="submit" class="btn btn-primary" name="submit">Submit</button>

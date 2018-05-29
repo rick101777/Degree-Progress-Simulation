@@ -1,33 +1,91 @@
 <h1 style="text-align: center;">Data Retriver Beta</h1>
 <?php
+	include ("AlgorithmStudentPreferences.php");
+	
+	global $Student;
+
+	if (isset($_POST['submit'])){
+
+		$Major = $_POST['Major'];
+		$Concentration = $_POST['Concentration'];
+		$Quantity = $_POST['Quantity'];
+		$Location = $_POST['Location'];
+
+		$Student = new Student();
+		$Student->setMajor($Major);
+		$Student->setConcentration($Concentration);
+		$Student->setQuantity($Quantity);
+		$Student->setLocation($Location);
+
+		print_r($Student);
+
+		$Retrieves = new CourseDataRetriver($Student);
+		$Data = $Retrieves->FetchCourses();
+		$Retrieves->toString($Data); 
+
+	}
+
+
+
 
 	// Accesses the Database and Retrieves the data from it, and converts the course data to Course Nodes
 	class CourseDataRetriver{
 
-		public function __construct(){
+		private $Student;
 
+		public function __construct($Student){
+			$this->Student = $Student;
 		}
 
 
-		public function FetchANDPrereq($CourseID){
-
+		public function FetchANDPrereq($Course){
+			include("includes/dbh.inc.php");
+			$CourseID = $Course->getCourseID();
+			$Query = "SELECT PREREQ_ID FROM PREREQ_AND WHERE COURSE_ID = $CourseID";
+			$result = mysqli_query($conn, $Query);
+			$row = mysqli_fetch_all($result);
+			$Size = count($row);
+			if ($Size > 0){
+				for ($i = 0; $i < $Size; $i++){
+					$Course->addANDPrereq($row[$i][0]);
+				}
+			}
 		}
 
-		public function FetchORPrereq($CourseID){
-			include ('includes/dbh.inc.php');
-
-
+		public function FetchORPrereq($Course){
+			include("includes/dbh.inc.php");
+			$CourseID = $Course->getCourseID();
+			$Query = "SELECT PREREQ_ID FROM PREREQ_OR WHERE COURSE_ID = $CourseID";
+			$result = mysqli_query($conn, $Query);
+			$row = mysqli_fetch_all($result);
+			$Size = count($row);
+			if ($Size > 0){
+				for ($i = 0; $i < $Size; $i++){
+					$Course->addORPrereq($row[$i][0]);
+				}
+			}
 
 		}
 
 
 		// Handles fetching the data from the database, and constructs an array of course nodes.
 		public function FetchCourses(){
-			include ('includes/dbh.inc.php');
-			$result = mysqli_query($conn, "SELECT * FROM COURSES WHERE LOCATION = 'LOOP' AND CONSENT = 'N'");
+			include("AlgorithmCourseNode.php");
+			include("includes/dbh.inc.php");
+
+			$Major = $this->Student->getMajor();
+			$PreferedLocation = $this->Student->getLocation();
+
+			if ($PreferedLocation != "Online"){
+				$Query = "SELECT * FROM COURSES WHERE SUBJECT_DESC = '$Major' AND LOCATION != 'ONLINE'"; 
+			}else{
+				$Query = "SELECT * FROM COURSES WHERE SUBJECT_DESC = '$Major' AND LOCATION = 'ONLINE'";;
+			}
+
+			$result = mysqli_query($conn, $Query);
 			$row = mysqli_fetch_all($result);
-			print_r($row[0]);
-			echo "<br><br>";
+			//print_r($row[0]);
+			//echo "<br><br>";
 			$size = count($row);
 			$NodeArray = array();
 			for ($i = 0; $i < $size; $i++){
@@ -47,29 +105,45 @@
 				$Node->setConsent($Consent);
 				$Node->setSubjectDesc($SubjectDesc);
 				$Node->setLocation($Location);
+				$TermsOffered = $Node->getTermsOfferedArray();
+				$TermsOffered["Autumn"] = $AccessedRow[8];
+				$TermsOffered["Winter"] = $AccessedRow[9];
+				$TermsOffered["Spring"] = $AccessedRow[10];
+				$TermsOffered["Summer"] = $AccessedRow[11];
+				$Node->setTermsOffered($TermsOffered);
+
+				$this->FetchANDPrereq($Node);
+				$this->FetchORPrereq($Node);
+
 
 				Array_push($NodeArray, $Node);
 			}
 
-			mysqli_close($conn);
 			return $NodeArray;
 		}
 
 
 		public function Run(){
+			$this->FetchCourses();
 
 		}
 
 		// Outputs the course data for human consumption
 		// Makes the data readable
 		public function toString($data){
+
+			echo "<br>";
 			for ($i = 0; $i < count($data); $i++){
 				$RawNode = $data[$i];
 				echo "". $RawNode->getCourseID().", ". $RawNode->getCategoryNumber(). ", ".$RawNode->getSubject().", ".$RawNode->getTitle().", ". $RawNode->getConsent(). ",". $RawNode->getSubjectDesc(). "," .$RawNode->getLocation().", "; 
+				print_r($RawNode->getTermsOfferedArray());
+				echo ", \t";
 				print_r($RawNode->getANDPrereqArray());
+				echo ", \t";
+				print_r($RawNode->getORPrereqArray());
+
 				echo "<br><br>";
 			}
 		}
-
 	}
 ?>
