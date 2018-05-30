@@ -13,7 +13,10 @@
 			$NewNode = new Course();
 			$NewNode->setCourseID($Node->getCourseID());
 			$NewNode->setSubject($Node->getSubject());
+			$NewNode->setCategoryNumber($Node->getCategoryNumber());
 			$NewNode->setTitle($Node->getTitle());
+			$NewNode->setConsent($Node->getConsent());
+			$NewNode->setSubjectDesc($Node->getSubjectDesc());
 			$NewNode->setLocation($Node->getLocation());
 			$NewNode->Next = $this->first;
 			$this->first = &$NewNode;
@@ -23,11 +26,6 @@
 
 		public function Insert($Node){
 			if ($this->first != Null){
-				$NewNode = new Course();
-				$NewNode->setCourseID($Node->getCourseID());
-				$NewNode->setSubject($Node->getSubject());
-				$NewNode->setTitle($Node->getTitle());
-				$NewNode->setLocation($Node->getLocation());
 				$this->first->Next = &$Node;
 				$this->Count++;
 			}

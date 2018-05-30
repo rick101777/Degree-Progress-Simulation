@@ -21,9 +21,7 @@
 
 		// Handles the construction of the Adjacency List, by creating an array, which gets populated with
 		// LinkedList objects full of Course Nodes, and their respective Prerequisite Connections.
-		public function BuildAdjacencyList(){
-			$DataRetriver = new CourseDataRetriver();
-			$CourseData = $DataRetriver->Fetch();
+		public function BuildAdjacencyList($CourseData){
 			$DataSize = count($CourseData);
 			if ($DataSize == 0){
 				echo "Insuffcient Data to Work With.";

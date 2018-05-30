@@ -2,32 +2,6 @@
 <?php
 	include ("AlgorithmStudentPreferences.php");
 	
-	global $Student;
-
-	if (isset($_POST['submit'])){
-
-		$Major = $_POST['Major'];
-		$Concentration = $_POST['Concentration'];
-		$Quantity = $_POST['Quantity'];
-		$Location = $_POST['Location'];
-
-		$Student = new Student();
-		$Student->setMajor($Major);
-		$Student->setConcentration($Concentration);
-		$Student->setQuantity($Quantity);
-		$Student->setLocation($Location);
-
-		print_r($Student);
-
-		$Retrieves = new CourseDataRetriver($Student);
-		$Data = $Retrieves->FetchCourses();
-		$Retrieves->toString($Data); 
-
-	}
-
-
-
-
 	// Accesses the Database and Retrieves the data from it, and converts the course data to Course Nodes
 	class CourseDataRetriver{
 
@@ -38,7 +12,7 @@
 		}
 
 
-		public function FetchANDPrereq($Course){
+		private function FetchANDPrereq($Course){
 			include("includes/dbh.inc.php");
 			$CourseID = $Course->getCourseID();
 			$Query = "SELECT PREREQ_ID FROM PREREQ_AND WHERE COURSE_ID = $CourseID";
@@ -52,7 +26,7 @@
 			}
 		}
 
-		public function FetchORPrereq($Course){
+		private function FetchORPrereq($Course){
 			include("includes/dbh.inc.php");
 			$CourseID = $Course->getCourseID();
 			$Query = "SELECT PREREQ_ID FROM PREREQ_OR WHERE COURSE_ID = $CourseID";
@@ -69,7 +43,7 @@
 
 
 		// Handles fetching the data from the database, and constructs an array of course nodes.
-		public function FetchCourses(){
+		private function FetchCourses(){
 			include("AlgorithmCourseNode.php");
 			include("includes/dbh.inc.php");
 
@@ -77,9 +51,9 @@
 			$PreferedLocation = $this->Student->getLocation();
 
 			if ($PreferedLocation != "Online"){
-				$Query = "SELECT * FROM COURSES WHERE SUBJECT_DESC = '$Major' AND LOCATION != 'ONLINE'"; 
+				$Query = "SELECT * FROM COURSES WHERE SUBJECT_DESC = '$Major' AND LOCATION != 'ONLINE' AND CONSENT = 'N'"; 
 			}else{
-				$Query = "SELECT * FROM COURSES WHERE SUBJECT_DESC = '$Major' AND LOCATION = 'ONLINE'";;
+				$Query = "SELECT * FROM COURSES WHERE SUBJECT_DESC = '$Major' AND LOCATION = 'ONLINE' AND CONSENT = 'N'";
 			}
 
 			$result = mysqli_query($conn, $Query);
@@ -124,7 +98,8 @@
 
 
 		public function Run(){
-			$this->FetchCourses();
+			$Result = $this->FetchCourses();
+			return $Result;
 
 		}
 

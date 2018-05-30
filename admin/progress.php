@@ -6,7 +6,7 @@
       <h1>Degree Progress Simulation</h1>
     </div>
     <div class="space"></div>
-    <form class="form-group" action = "/AlgorithmDataRetriver.php" method = "POST">
+    <form class="form-group" action = "/Algorithm.php" method = "POST">
       <div class="box">
         <label>Major</label>
         <select class="form-control" name = "Major">

@@ -2,9 +2,41 @@
 <?php
 	include("AlgorithmAdjacencyList.php");
 	include("AlgorithmStack.php");
-	include("AlgorithmCourseNode.php");
 	include("AlgorithmDataRetriver.php");
 	include("AlgorithmLinkedList.php");
+	
+
+	if (isset($_POST['submit'])){
+
+		$Major = $_POST['Major'];
+		$Concentration = $_POST['Concentration'];
+		$Quantity = $_POST['Quantity'];
+		$Location = $_POST['Location'];
+
+		$Student = new Student();
+		$Student->setMajor($Major);
+		$Student->setConcentration($Concentration);
+		$Student->setQuantity($Quantity);
+		$Student->setLocation($Location);
+
+		//print_r($Student);
+
+		$Retrieves = new CourseDataRetriver($Student);
+		$Data = $Retrieves->Run();
+		//$Retrieves->toString($Data); 
+		$adjacencyList = new AdjacencyList();
+		$adjacencyList->BuildAdjacencyList($Data);
+		for ($i = 0; $i < count($adjacencyList->getAdjacencyList()); $i++){
+    		print_r($adjacencyList->getAdjacencyList()[$i]);
+    		echo "<br><br>";
+    	}
+		//var_dump($adjacencyList->getAdjacencyList()[0]->first);
+		$Graph = new Graph($adjacencyList);
+		$Graph->TopologicalSort();
+
+	}
+
+
 
 	class Graph{
 
@@ -57,11 +89,11 @@
 
 
 			$Node = $this->AdjacencyList->getAdjacencyList()[$Index]->first;
-			$Stack->Push($Node);
 			while ($Node->Next != NULL){
 				echo "Origin: ". $Node->getCourseID(). ", Future: ". $Node->Next->getCourseID();
 				echo "<br><br>";
 				$Node = $Node->Next;
+				$Stack->Push($Node);
 				$nextIndex = $this->Find($Node);
 				if ($Visited[$nextIndex] == 0){
 					//echo "CourseID : ". $Node->getCourseID(0). ", Index: ". $nextIndex . ", ArrayValue: ". $this->AdjacencyList->getAdjacencyList()[$nextIndex]->first->getCourseID();
@@ -77,15 +109,7 @@
 	}
 
 
-	$CourseDataRetriver = new CourseDataRetriver();
-	$Data = $CourseDataRetriver->FetchCourses();
-	$CourseDataRetriver->toString($Data);
-	//$adjacencyList = new AdjacencyList();
-	//$adjacencyList->BuildAdjacencyList();
-    //print_r($adjacencyList->getAdjacencyList()[4]);
-	//var_dump($adjacencyList->getAdjacencyList()[0]->first);
-	//$Graph = new Graph($adjacencyList);
-	//$Graph->TopologicalSort();
+
 
 
 ?>
