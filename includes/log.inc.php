@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     exit();
     }
     else{
-      $sql="SELECT * FROM POPULATION WHERE Email='$mail'";
+      $sql="SELECT * FROM POPULATION WHERE EMAIL='$mail'";
       $result=mysqli_query($conn, $sql);
       $resultCheck=mysqli_num_rows($result);
       if ($resultCheck<1) {
@@ -20,33 +20,34 @@ if (isset($_POST['submit'])) {
       }
       else{
         if ($row=mysqli_fetch_assoc($result)) {
-          if ($pwd!=$row['Password']) {
+          if ($pwd!=$row['PASSWORD']) {
             header("Location: ../index.php?login=error");
             exit();
           }
-          elseif($pwd==$row['Password'] && $row['PID']=="STU"){
-            $_SESSION["s_email"]= $row['Email'];
+          elseif($pwd==$row['PASSWORD'] && $row['PID']=="STU"){
+            $_SESSION["s_email"]= $row['EMAIL'];
             $_SESSION['s_id']=$row['ID'];
-            $_SESSION['s_first']=$row['FirstName'];
-            $_SESSION['s_last']=$row['LastName'];
-            $_SESSION['s_major']=$row['MajorList'];
+            $_SESSION['s_first']=$row['FNAME'];
+            $_SESSION['s_last']=$row['LNAME'];
+            $_SESSION['s_major']=$row['MAJOR'];
+            $_SESSION['s_con']=$row['CONCENTRATION'];
             header("Location: ../home.php");
             exit();
           }
-          elseif ($pwd==$row['Password'] && $row['PID']=="ADM") {
-            $_SESSION["a_email"]= $row['Email'];
+          elseif ($pwd==$row['PASSWORD'] && $row['PID']=="ADM") {
+            $_SESSION["a_email"]= $row['EMAIL'];
             $_SESSION['a_id']=$row['ID'];
-            $_SESSION['a_first']=$row['FirstName'];
-            $_SESSION['a_last']=$row['LastName'];
+            $_SESSION['a_first']=$row['FNAME'];
+            $_SESSION['a_last']=$row['LNAME'];
             header("Location: ../admin/home.php");
             exit();
           }
-          elseif ($pwd==$row['Password'] && $row['PID']=="FAC") {
-            $_SESSION["f_email"]= $row['Email'];
+          elseif ($pwd==$row['PASSWORD'] && $row['PID']=="FAC") {
+            $_SESSION["f_email"]= $row['EMAIL'];
             $_SESSION['f_id']=$row['ID'];
-            $_SESSION['f_first']=$row['FirstName'];
-            $_SESSION['f_last']=$row['LastName'];
-            $_SESSION['f_dept']=$row['Department'];
+            $_SESSION['f_first']=$row['FNAME'];
+            $_SESSION['f_last']=$row['LNAME'];
+            $_SESSION['f_dept']=$row['DEPARTMENT'];
             header("Location: ../faculty/home.php");
             exit();
           }

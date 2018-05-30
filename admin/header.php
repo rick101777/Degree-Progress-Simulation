@@ -32,16 +32,7 @@
            <li><a href="contact.php">Contact</a></li>
            <li><a href="course_search.php">Course Search</a></li>
            <li><a href="user_search.php">User Search</a></li>
-           <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="insert_user.php">Insert User</a></li>
-                  <li><a href="delete_user.php">Delete User</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="insert_class.php">Insert Class</a></li>
-                  <li><a href="delete_class.php">Delete Class</a></li>
-                </ul>
-              </li>
+           <li><a href="degree_requirements.php">Degree Requirements</a></li>
          </ul>
 
          <ul class="nav navbar-nav navbar-right">

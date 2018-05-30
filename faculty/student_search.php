@@ -20,7 +20,7 @@ include ('../includes/dbh.inc.php');
 </html>
 
 <?php
-$query="SELECT ID, Email, FirstName, LastName, MajorList FROM POPULATION WHERE PID='STU'";
+$query="SELECT ID, EMAIL, FNAME, LNAME, MAJOR, CONCENTRATION FROM POPULATION WHERE PID='STU'";
 $result= mysqli_query($conn, $query);
 echo "<table class='table' border = '1'>";
 echo "<thead>";
@@ -30,11 +30,12 @@ echo "<th scope='col'>Email</th>";
 echo "<th scope='col'>First Name</th>";
 echo "<th scope='col'>Last Name</th>";
 echo "<th scope='col'>Major</th>";
+echo "<th scope='col'>Concentration</th>";
 echo "</tr>";
 echo "</thead>";
 echo "<tbody>";
 while ($row=mysqli_fetch_assoc($result)) {
- echo "<tr><td>{$row['ID']}</td> <td>{$row['Email']} </td> <td>{$row['FirstName']}</td> <td>{$row['LastName']}</td> <td>{$row['MajorList']}</td></tr>";
+ echo "<tr><td>{$row['ID']}</td> <td>{$row['EMAIL']} </td> <td>{$row['FNAME']}</td> <td>{$row['LNAME']}</td> <td>{$row['MAJOR']}</td> <td>{$row['CONCENTRATION']}</td></tr>";
 }
 echo "</tbody>";
 echo "</table>";

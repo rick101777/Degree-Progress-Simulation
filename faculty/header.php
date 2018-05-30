@@ -32,6 +32,7 @@
            <li><a href="contact.php">Contact</a></li>
            <li><a href="course_search.php">Course Search</a></li>
            <li><a href="student_search.php">Student Search</a></li>
+           <li><a href="degree_requirements.php">Degree Requirements</a></li>
          </ul>
 
          <ul class="nav navbar-nav navbar-right">
