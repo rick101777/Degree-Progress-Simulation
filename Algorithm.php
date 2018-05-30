@@ -89,11 +89,11 @@
 
 
 			$Node = $this->AdjacencyList->getAdjacencyList()[$Index]->first;
+			$Stack->Push($Node);
 			while ($Node->Next != NULL){
 				echo "Origin: ". $Node->getCourseID(). ", Future: ". $Node->Next->getCourseID();
 				echo "<br><br>";
 				$Node = $Node->Next;
-				$Stack->Push($Node);
 				$nextIndex = $this->Find($Node);
 				if ($Visited[$nextIndex] == 0){
 					//echo "CourseID : ". $Node->getCourseID(0). ", Index: ". $nextIndex . ", ArrayValue: ". $this->AdjacencyList->getAdjacencyList()[$nextIndex]->first->getCourseID();
