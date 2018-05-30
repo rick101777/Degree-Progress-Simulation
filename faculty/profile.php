@@ -51,14 +51,14 @@ $email= "<h4>" . $_SESSION['f_email'] . "<h4>";
           <div class ="col-md-6">
             <i class="fas fa-book"></i>
             <h3>Degree Progress</h3>
-            <p>Vestibulum neque erat, semper elementum justo posuere, porta eleifend quam. Cras viverra ultricies lacinia. Nulla elementum ligula sed nunc finibus commodo. Curabitur efficitur velit mauris, pulvinar volutpat tortor egestas commodo. Praesent eget ante commodo, iaculis </p>
+            <p>This will take you to the degree progress simulation page. Here you will be able to create a simulation of how long it would take you to finish your degree! </p>
             <a href="progress.php" class="btn btn-primary">GO!</a>
           </div>
 
           <div class ="col-md-6">
             <i class="fas fa-phone"></i>
             <h3>Contact</h3>
-            <p>Vestibulum neque erat, semper elementum justo posuere, porta eleifend quam. Cras viverra ultricies lacinia. Nulla elementum ligula sed nunc finibus commodo. Curabitur efficitur .</p>
+            <p>This will take you to our contact information. You will learn how to set up an appointment with a consuler. It will also give you the location of the CDM college.</p>
             <a href="contact.php" class="btn btn-primary">GO!</a>
           </div>
         </div>

@@ -31,6 +31,7 @@
            <li><a href="progress.php">Progress</a></li>
            <li><a href="contact.php">Contact</a></li>
            <li><a href="course_search.php">Course Search</a></li>
+           <li><a href="degree_requirements.php">Degree Requirements</a></li>
          </ul>
 
          <ul class="nav navbar-nav navbar-right">

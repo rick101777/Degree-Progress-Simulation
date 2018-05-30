@@ -17,7 +17,7 @@ include ('includes/dbh.inc.php');
 <?php
   if (isset($_POST['submit-search'])) {
     $search = mysqli_real_escape_string($conn, $_POST['search']);
-    $sql = "SELECT * FROM t_courses WHERE SUBJECT_DESC LIKE '%$search%' OR TITLE LIKE '%$search%' OR LOCATION LIKE '%$search%' OR COURSE_ID LIKE '%$search%'";
+    $sql = "SELECT * FROM COURSES WHERE SUBJECT_DESC LIKE '%$search%' OR TITLE LIKE '%$search%' OR LOCATION LIKE '%$search%' OR COURSE_ID LIKE '%$search%'";
     $result = mysqli_query($conn, $sql);
     $queryResult = mysqli_num_rows($result);
     if (empty($search)) {

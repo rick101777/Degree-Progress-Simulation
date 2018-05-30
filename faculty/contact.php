@@ -16,13 +16,13 @@
                 <div class="panel-heading" role="tab" id="headingOne">
                   <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Collapsible Group Item #1
+                      Regular Office Hours
                     </a>
                   </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                   <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  Regular office hours: Monday-Thursday 9am-6pm, Friday 9am-5pm
                   </div>
                 </div>
               </div>
@@ -30,13 +30,14 @@
                 <div class="panel-heading" role="tab" id="headingTwo">
                   <h4 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      Collapsible Group Item #2
+                      Walk-in/Phone-in Information
                     </a>
                   </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                   <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    Scheduled appointments are encouraged and may be set in BlueStar
+                    Walk-in/phone-in advising for brief inquiries available Monday and Wednesday 10am-noon or Tuesday and Thursday 3pm-5pm
                   </div>
                 </div>
               </div>
@@ -44,13 +45,19 @@
                 <div class="panel-heading" role="tab" id="headingThree">
                   <h4 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      Collapsible Group Item #3
+                      Location and Contact Information
                     </a>
                   </h4>
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                   <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    14 E. Jackson (Daley)
+                    Suite 100
+                    Chicago, IL 60604
+                    <br>
+                    Contact Us
+                    (312) 362-8633
+                    advising@cdm.depaul.edu
                   </div>
                 </div>
               </div>
@@ -70,14 +77,14 @@
           <div class ="col-md-6">
             <i class="fas fa-book"></i>
             <h3>Degree Progress</h3>
-            <p>Vestibulum neque erat, semper elementum justo posuere, porta eleifend quam. Cras viverra ultricies lacinia. Nulla elementum ligula sed nunc finibus commodo. Curabitur efficitur velit mauris, pulvinar volutpat tortor egestas commodo. Praesent eget ante commodo, iaculis </p>
+            <p>This will take you to the degree progress simulation page. Here you will be able to create a simulation of how long it would take you to finish your degree! </p>
             <a href="progress.php" class="btn btn-primary">GO!</a>
           </div>
 
           <div class ="col-md-6">
             <i class="fas fa-id-card"></i>
             <h3>Profile</h3>
-            <p>Vestibulum neque erat, semper elementum justo posuere, porta eleifend quam. Cras viverra ultricies lacinia. Nulla elementum ligula sed nunc finibus commodo. Curabitur efficitur </p>
+            <p>This will take you to your profile page. Here you will be able to see your major, concentration, email, and name. </p>
             <a href="profile.php" class="btn btn-primary">GO!</a>
           </div>
         </div>

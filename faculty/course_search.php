@@ -20,7 +20,7 @@ include ('../includes/dbh.inc.php');
 </html>
 
 <?php
-$query="SELECT * FROM t_courses";
+$query="SELECT * FROM COURSES";
 $result= mysqli_query($conn, $query);
 echo "<table class='table' border = '1'>";
 echo "<thead>";
