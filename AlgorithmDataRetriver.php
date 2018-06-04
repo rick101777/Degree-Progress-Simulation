@@ -12,7 +12,16 @@
 		}
 
 
-		private function FetchANDPrereq($Course){
+		private function FindCourse($PrereqCourseID, $Course, &$CourseData){
+			// Look for the course in the Course Array, 
+			// If it is not present, then Query the Database
+			// Create the Course Node with the Database Information
+			
+
+		}
+
+
+		private function FetchANDPrereq($Course, &$CourseData){
 			include("includes/dbh.inc.php");
 			$CourseID = $Course->getCourseID();
 			$Query = "SELECT PREREQ_ID FROM PREREQ_AND WHERE COURSE_ID = $CourseID";
@@ -26,7 +35,7 @@
 			}
 		}
 
-		private function FetchORPrereq($Course){
+		private function FetchORPrereq($Course, &$CourseData){
 			include("includes/dbh.inc.php");
 			$CourseID = $Course->getCourseID();
 			$Query = "SELECT PREREQ_ID FROM PREREQ_OR WHERE COURSE_ID = $CourseID";
@@ -41,23 +50,52 @@
 
 		}
 
+		private function QueryingDatabase(){
+			$Major = $this->Student->getMajor();
+			$Concentration = $this->Student->getConcentration();
+			$PreferedLocation = $this->Student->getLocation();
+			if ($PreferedLocation == "In-Person"){
+				$PreferedLocation = "LOOP";
+			}
+			else {
+				$PreferedLocation = "ONLINE";
+			}
+
+			$Query;
+			if ($Major == "Computer Science"){
+				$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN CSC_REQUIREMENTS ON COURSES.COURSE_ID = CSC_REQUIREMENTS.CID WHERE COURSES.LOCATION = '$PreferedLocation' AND CSC_REQUIREMENTS.REQUIREMENT = 'R'"; 
+			}
+			if ($Major == "Information Systems"){
+				if ($Concentration == "IS: Standard"){
+					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_STD ON COURSES.COURSE_ID = IS_REQUIREMENTS_STD.CID AND COURSES.LOCATION = '$PreferedLocation'";
+				}
+				else if ($Concentration == "IS: Business Analysis/Systems Analysis"){
+					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_BASA ON COURSES.COURSE_ID = IS_REQUIREMENTS_BASA.CID AND COURSES.LOCATION = '$PreferedLocation'";
+				}
+				else if ($Concentration == "IS: Business Intelligence"){
+					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_BI ON COURSES.COURSE_ID = IS_REQUIREMENTS_BI.CID AND COURSES.LOCATION = '$PreferedLocation'";
+				}
+				else if ($Concentration == "IS: Database Adminstration"){
+					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_DA ON COURSES.COURSE_ID = IS_REQUIREMENTS_DA.CID AND COURSES.LOCATION = '$PreferedLocation'";
+				}
+				else if ($Concentration == "IS: IT Enterprise Management"){
+					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_IEM ON COURSES.COURSE_ID = IS_REQUIREMENTS_IEM.CID AND COURSES.LOCATION = '$PreferedLocation'";
+				}
+			}
+			return $Query;
+
+		}
+
 
 		// Handles fetching the data from the database, and constructs an array of course nodes.
-		private function FetchCourses(){
+		private function FetchCourses($Query){
 			include("AlgorithmCourseNode.php");
 			include("includes/dbh.inc.php");
 
-			$Major = $this->Student->getMajor();
-			$PreferedLocation = $this->Student->getLocation();
-
-			if ($PreferedLocation != "Online"){
-				$Query = "SELECT * FROM COURSES WHERE SUBJECT_DESC = '$Major' AND LOCATION != 'ONLINE' AND CONSENT = 'N'"; 
-			}else{
-				$Query = "SELECT * FROM COURSES WHERE SUBJECT_DESC = '$Major' AND LOCATION = 'ONLINE' AND CONSENT = 'N'";
-			}
 
 			$result = mysqli_query($conn, $Query);
 			$row = mysqli_fetch_all($result);
+
 			//print_r($row[0]);
 			//echo "<br><br>";
 			$size = count($row);
@@ -86,9 +124,8 @@
 				$TermsOffered["Summer"] = $AccessedRow[11];
 				$Node->setTermsOffered($TermsOffered);
 
-				$this->FetchANDPrereq($Node);
-				$this->FetchORPrereq($Node);
-
+				$this->FetchANDPrereq($Node, $NodeArray);
+				$this->FetchORPrereq($Node, $NodeArray);
 
 				Array_push($NodeArray, $Node);
 			}
@@ -98,7 +135,8 @@
 
 
 		public function Run(){
-			$Result = $this->FetchCourses();
+			$Query = $this->QueryingDatabase();
+			$Result = $this->FetchCourses($Query);
 			return $Result;
 
 		}
@@ -110,13 +148,10 @@
 			echo "<br>";
 			for ($i = 0; $i < count($data); $i++){
 				$RawNode = $data[$i];
-				echo "". $RawNode->getCourseID().", ". $RawNode->getCategoryNumber(). ", ".$RawNode->getSubject().", ".$RawNode->getTitle().", ". $RawNode->getConsent(). ",". $RawNode->getSubjectDesc(). "," .$RawNode->getLocation().", "; 
-				print_r($RawNode->getTermsOfferedArray());
-				echo ", \t";
+				echo "". $RawNode->getCourseID().", ". $RawNode->getCategoryNumber(). ", ".$RawNode->getSubject().", ".$RawNode->getTitle().",". $RawNode->getSubjectDesc(). "," .$RawNode->getLocation().",";
 				print_r($RawNode->getANDPrereqArray());
-				echo ", \t";
+				echo ", ";
 				print_r($RawNode->getORPrereqArray());
-
 				echo "<br><br>";
 			}
 		}

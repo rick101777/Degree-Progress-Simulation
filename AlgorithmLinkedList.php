@@ -10,23 +10,37 @@
 		}
 
 		public function InsertFirst($Node){
-			$NewNode = new Course();
-			$NewNode->setCourseID($Node->getCourseID());
-			$NewNode->setSubject($Node->getSubject());
-			$NewNode->setCategoryNumber($Node->getCategoryNumber());
-			$NewNode->setTitle($Node->getTitle());
-			$NewNode->setConsent($Node->getConsent());
-			$NewNode->setSubjectDesc($Node->getSubjectDesc());
-			$NewNode->setLocation($Node->getLocation());
-			$NewNode->Next = $this->first;
-			$this->first = &$NewNode;
+			$temp = new Course();
+			$temp->setCourseID($Node->getCourseID());
+			$temp->setSubject($Node->getSubject());
+			$temp->setCategoryNumber($Node->getCategoryNumber());
+			$temp->setTitle($Node->getTitle());
+			$temp->setSubjectDesc($Node->getSubjectDesc());
+			$temp->setConsent($Node->getConsent());
+			$temp->setLocation($Node->getLocation());
+			$temp->setTermsOffered($Node->getTermsOfferedArray());
+			$this->first = &$temp;
 			$this->Count++;
 		}
 
 
 		public function Insert($Node){
-			if ($this->first != Null){
-				$this->first->Next = &$Node;
+			if (!is_null($this->first)){
+				$temp = new Course();
+				$temp->setCourseID($Node->getCourseID());
+				$temp->setSubject($Node->getSubject());
+				$temp->setCategoryNumber($Node->getCategoryNumber());
+				$temp->setTitle($Node->getTitle());
+				$temp->setSubjectDesc($Node->getSubjectDesc());
+				$temp->setConsent($Node->getConsent());
+				$temp->setLocation($Node->getLocation());
+				$temp->setTermsOffered($Node->getTermsOfferedArray());
+				$currentNode = $this->first;
+				while ($currentNode->Next !== NULL){
+					$currentNode = $currentNode->Next;
+				}
+
+				$currentNode->Next = $temp;
 				$this->Count++;
 			}
 			else{
