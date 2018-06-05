@@ -12,15 +12,6 @@
 		}
 
 
-		private function FindCourse($PrereqCourseID, $Course, &$CourseData){
-			// Look for the course in the Course Array, 
-			// If it is not present, then Query the Database
-			// Create the Course Node with the Database Information
-			
-
-		}
-
-
 		private function FetchANDPrereq($Course, &$CourseData){
 			include("includes/dbh.inc.php");
 			$CourseID = $Course->getCourseID();
@@ -67,19 +58,19 @@
 			}
 			if ($Major == "Information Systems"){
 				if ($Concentration == "IS: Standard"){
-					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_STD ON COURSES.COURSE_ID = IS_REQUIREMENTS_STD.CID AND COURSES.LOCATION = '$PreferedLocation'";
+					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_STD ON COURSES.COURSE_ID = IS_REQUIREMENTS_STD.CID AND COURSES.LOCATION = '$PreferedLocation' AND IS_REQUIREMENTS_STD.REQUIREMENT = 'R'";
 				}
 				else if ($Concentration == "IS: Business Analysis/Systems Analysis"){
-					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_BASA ON COURSES.COURSE_ID = IS_REQUIREMENTS_BASA.CID AND COURSES.LOCATION = '$PreferedLocation'";
+					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_BASA ON COURSES.COURSE_ID = IS_REQUIREMENTS_BASA.CID AND COURSES.LOCATION = '$PreferedLocation' AND IS_REQUIREMENTS_BASA.REQUIREMENT = 'R'";
 				}
 				else if ($Concentration == "IS: Business Intelligence"){
-					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_BI ON COURSES.COURSE_ID = IS_REQUIREMENTS_BI.CID AND COURSES.LOCATION = '$PreferedLocation'";
+					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_BI ON COURSES.COURSE_ID = IS_REQUIREMENTS_BI.CID AND COURSES.LOCATION = '$PreferedLocation' AND IS_REQUIREMENTS_BI.REQUIREMENT = 'R'";
 				}
 				else if ($Concentration == "IS: Database Adminstration"){
-					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_DA ON COURSES.COURSE_ID = IS_REQUIREMENTS_DA.CID AND COURSES.LOCATION = '$PreferedLocation'";
+					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_DA ON COURSES.COURSE_ID = IS_REQUIREMENTS_DA.CID AND COURSES.LOCATION = '$PreferedLocation' AND IS_REQUIREMENTS_DA.REQUIREMENT = 'R'";
 				}
 				else if ($Concentration == "IS: IT Enterprise Management"){
-					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_IEM ON COURSES.COURSE_ID = IS_REQUIREMENTS_IEM.CID AND COURSES.LOCATION = '$PreferedLocation'";
+					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_IEM ON COURSES.COURSE_ID = IS_REQUIREMENTS_IEM.CID AND COURSES.LOCATION = '$PreferedLocation' AND IS_REQUIREMENTS_IEM.REQUIREMENT = 'R'";
 				}
 			}
 			return $Query;

@@ -52,6 +52,10 @@
 			return $this->first == NULL;
 		}
 
+		public function getCount(){
+			return $this->Count;
+		}
+
 	}
 
 ?>

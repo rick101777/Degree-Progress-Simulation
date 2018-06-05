@@ -10,13 +10,13 @@
 		}
 
 		public function Push($Object){
-			array_unshift($this->Stack, $Object);
+			array_push($this->Stack, $Object);
 			$this->Count++;
 		}
 
 		public function Pop(){
 			$this->Count--;
-			return array_pop($this->Stack);
+			return array_shift($this->Stack);
 		}
 
 		public function isEmpty(){
