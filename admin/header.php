@@ -33,6 +33,7 @@
            <li><a href="course_search.php">Course Search</a></li>
            <li><a href="user_search.php">User Search</a></li>
            <li><a href="degree_requirements.php">Degree Requirements</a></li>
+           <li><a href="data_reports.php">Data Reports</a></li>
          </ul>
 
          <ul class="nav navbar-nav navbar-right">
