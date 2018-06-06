@@ -12,7 +12,7 @@
   <body>
     <div class="img-container">
       <div class="col-md-8">
-        <img src="img/dpbg.jpg"width=100% height=80%>
+        
       </div>
     </div>
     <div class="log">
@@ -27,7 +27,6 @@
           <input type="password" name="pwd" class="form-control" placeholder="Password" required>
           <br>
           <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Sign in</button>
-          <a href = "Algorithm.php">Course Search Beta</a>
         </form> 
 
     </div>
