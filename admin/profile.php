@@ -23,10 +23,16 @@ $email= "<h4>" . $_SESSION['a_email'] . "<h4>";
               <div class="well">
                 <h3>Name:</h3>
                 <p><?php echo $fname.$lname ?></p>
+				<form action="/editProfile.php" method= "post">
+					<input type="text" name="fname" placeholder="Edit First Name">
+					<button class="btn btn-primary btn-sm" type="submit" name="submit-FName-Change">Change</button>
+					<input type="text" name="lname" placeholder="Edit Last Name">
+					<button class="btn btn-primary btn-sm" type="submit" name="submit-LName-Change">Change</button>
+				</form>
               </div>
               <div class="well">
                 <h3>Role:</h3>
-                <p><?php echo $role ?></p>
+                <p><?php echo $role ?></p>				
               </div>
               <div class="well">
                 <h3>Email:</h3>

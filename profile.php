@@ -24,14 +24,30 @@ $concentration= "<h4>" . $_SESSION['s_con'] . "<h4>";
               <div class="well">
                 <h3>Name:</h3>
                 <p><?php echo $fname.$lname ?></p>
+				<form action="/editProfile.php" method= "post">
+					<input type="text" name="fname" placeholder="Edit First Name">
+					<button class="btn btn-primary btn-sm" type="submit" name="submit-FName-Change">Change</button>
+					<input type="text" name="lname" placeholder="Edit Last Name">
+					<button class="btn btn-primary btn-sm" type="submit" name="submit-LName-Change">Change</button>
+				</form>
               </div>
               <div class="well">
                 <h3>Major:</h3>
                 <p><?php echo $major ?></p>
+				<form action= "/editProfile.php" method= "post">
+					<input type= "text" name= "major" placeholder= "Change Major">
+					<br><br>
+					<input type= "submit" value= "Submit">
+				</form>
               </div>
               <div class="well">
                 <h3>Concentration:</h3>
                 <p><?php echo $concentration ?></p>
+				<form action= "/editProfile.php" method= "post">
+					<input type= "text" name= "concentration" placeholder= "Change Concentration">
+					<br><br>
+					<input type= "submit" value= "Submit">
+				</form>
               </div>
               <div class="well">
                 <h3>Email:</h3>
