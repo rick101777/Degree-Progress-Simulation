@@ -50,18 +50,15 @@ class Terms {
             if (isset($_POST['submit'])){
 
                 $Student = new Student();
-                if (count($_POST) == 0){
+                if (count($_POST) < 2){
                     include("includes/dbh.inc.php");
-                    $StudentID = $_SESSION['s_id'];
+                    $StudentID = intval($_SESSION['s_id']);
 
                     $Query = "SELECT * FROM SAVED_SIMULATIONS WHERE SID = $StudentID";
 
                     $Result = mysqli_query($conn, $Query);
                     $row = mysqli_fetch_all($Result);
                     $size = count($row);
-                    for ($i = 0; $i < $size; $i++){
-                        echo $row[$i];
-                    }
                     $Student->setMajor();
                     $Student->setConcentration($Concentration);
                     $Student->setQuantity($Quantity);

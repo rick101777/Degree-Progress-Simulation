@@ -47,11 +47,11 @@
         <button type="submit" class="btn btn-primary" name="submit">Submit</button>
         <?php
           include("../includes/dbh.inc.php");
-          $SID = $_SESSION['s_id'];
+          $SID = intval($_SESSION['s_id']);
           $Query = "SELECT * FROM SAVED_SIMULATIONS WHERE SID = $SID";
           $Result = mysqli_query($conn, $Query);
           $row = mysqli_fetch_all($Result);
-          if (count($row) > 1){
+          if (count($row) >= 1){
           echo "<button type= 'submit' class= 'btn btn-primary' style = 'float: right;' name='submit'>Load</button>";
         }
         ?>
