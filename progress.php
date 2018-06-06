@@ -10,14 +10,14 @@
       <div class="box">
         <label>Major</label>
         <select class="form-control" name = "Major">
-          <option>Select Major</option>
+          <option disabled="disabled" selected="selected">Select Major</option>
           <option>Computer Science</option>
           <option>Information Systems</option>
         </select>
       </br>
         <label>Concentration</label>
         <select class="form-control" name = "Concentration">
-          <option>Select Concentration</option>
+          <option disabled="disabled" selected="selected">Select Concentration</option>
           <option>CSC: Standard</option>
           <option>IS: Standard</option>
           <option>IS: Business Analysis/Systems Analysis</option>
@@ -28,7 +28,7 @@
       <br>
         <label>Classes Per-Quarter</label>
         <select class="form-control" name = "Quantity">
-          <option>Select Number of Courses Per Quarter</option>
+          <option disabled="disabled" selected="selected">Select Number of Courses Per Quarter</option>
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -39,7 +39,7 @@
       <br>
         <label>Class Location</label>
         <select class = "form-control" name = "Location">
-          <option>Select Prefered Location</option>
+          <option disabled="disabled" selected="selected">Select Prefered Location</option>
           <option>In-Person</option>
           <option>Online</option>
         </select>
