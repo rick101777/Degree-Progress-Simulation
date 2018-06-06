@@ -1,11 +1,12 @@
-<h1 style = "text-align: center;">Algorithm Beta</h1>
+<!-- <h1 style = "text-align: center;">Algorithm Beta</h1> -->
+<link rel="stylesheet" href="css/report.css">
 <?php
 	include("AlgorithmAdjacencyList.php");
 	include("AlgorithmStack.php");
 	include("AlgorithmDataRetriver.php");
 	include("AlgorithmLinkedList.php");
 	
-
+/*
 	if (isset($_POST['submit'])){
 
 		$Major = $_POST['Major'];
@@ -35,7 +36,7 @@
 		$Graph->TopologicalSort();
 
 	}
-
+*/
 
 
 	class Graph{
@@ -89,18 +90,8 @@
 				if ($Node->Next != null){
 					$BackTraceRouteStack->Unshift($this->Find($Node));
 				}
-			}
-
-			$Numbered = 0;
-			while(!$OutputStack->isEmpty()){		// Writes the results out to the screen
-				echo "". $Numbered. ", ";
-				$Node = $OutputStack->Pop();
-				echo "". $Node->getCourseID(). ", ". $Node->getCategoryNumber() .", ". $Node->getTitle() .", ";
-				echo "<br><br>";
-				$Numbered++;
-			}
+			}            
 			return $OutputStack;
-
 		}
 
 		// Finds the Node's index within the adjacency List

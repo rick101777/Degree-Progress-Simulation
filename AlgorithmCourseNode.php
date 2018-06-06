@@ -1,4 +1,4 @@
-<h1 style="text-align: center;"> Course Node Beta</h1>
+<!-- <h1 style="text-align: center;"> Course Node Beta</h1> -->
 <?php
 	// Node class for courses, with database table attributes.
 	class Course{

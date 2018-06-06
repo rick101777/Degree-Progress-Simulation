@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">Data Retriver Beta</h1>
+<!-- //<h1 style="text-align: center;">Data Retriver Beta</h1> -->
 <?php
 	include ("AlgorithmStudentPreferences.php");
 	

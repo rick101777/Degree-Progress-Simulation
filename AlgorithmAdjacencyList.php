@@ -1,4 +1,4 @@
-<h1 style="text-align: center;"> Adjacency List Beta</h1>
+<!-- <h1 style="text-align: center;"> Adjacency List Beta</h1> -->
 <?php
 // Utilizes an Array of Course Nodes, and the Linked List class to make a Adjacency List
 	class AdjacencyList{

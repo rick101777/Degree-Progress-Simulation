@@ -1,4 +1,4 @@
-<h1 style="text-align: center;"> Stack Beta</h1>
+<!-- <h1 style="text-align: center;"> Stack Beta</h1> -->
 <?php
 	class Stack{
 

@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">Linked List Beta</h1>
+<!-- <h1 style="text-align: center;">Linked List Beta</h1> -->
 <?php
 	class LinkedList{
 		public $first;
