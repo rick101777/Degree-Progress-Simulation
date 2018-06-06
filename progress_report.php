@@ -18,32 +18,54 @@ include("Algorithm.php");
         <div class="space"></div>
 
             <?php
-    
             if (isset($_POST['submit'])){
 
-		        $Major = $_POST['Major'];
-		        $Concentration = $_POST['Concentration'];
-		        $Quantity = $_POST['Quantity'];
-		        $Location = $_POST['Location'];
-        
-        		$Student = new Student();
-        		$Student->setMajor($Major);
-        		$Student->setConcentration($Concentration);
-        		$Student->setQuantity($Quantity);
-        		$Student->setLocation($Location);
-        
-        		//print_r($Student);
+                $Student = new Student();
+                if (count($_POST) == 0){
+                    include("includes/dbh.inc.php");
+                    $StudentID = $_SESSION['s_id'];
+
+                    $Query = "SELECT * FROM SAVED_SIMULATIONS WHERE SID = $StudentID";
+
+                    $Result = mysqli_query($conn, $Query);
+                    $row = mysqli_fetch_all($Result);
+                    $size = count($row);
+                    for ($i = 0; $i < $size; $i++){
+                        echo $row[$i];
+                    }
+                    $Student->setMajor();
+                    $Student->setConcentration($Concentration);
+                    $Student->setQuantity($Quantity);
+                    $Student->setLocation($Location);
+                    
+                }else{
+
+    		        $Major = $_POST['Major'];
+    		        $Concentration = $_POST['Concentration'];
+    		        $Quantity = $_POST['Quantity'];
+    		        $Location = $_POST['Location'];
+
+                    $NumberQuantity = intval($Quantity);
+                    include("includes/dbh.inc.php");
+                    $StudentID = intval($_SESSION['s_id']);
+                    $Query1 = "DELETE FROM SAVED_SIMULATIONS WHERE SID = $StudentID";
+                    $Query2 = "INSERT INTO SAVED_SIMULATIONS (`SID`, `MAJOR`, `CONCENTRATION`, `QUANTITY`, `LOCATION`) VALUES ($StudentID, '$Major', '$Concentration', $NumberQuantity, '$Location')";
+
+                    $Result = mysqli_query($conn, $Query1);
+                    $Result2 = mysqli_query($conn, $Query2);
+
+                    $Student = new Student();
+                    $Student->setMajor($Major);
+                    $Student->setConcentration($Concentration);
+                    $Student->setQuantity($Quantity);
+                    $Student->setLocation($Location); 
+                
+                }
         
                 $Retrieves = new CourseDataRetriver($Student);
         		$Data = $Retrieves->Run();
-        		//$Retrieves->toString($Data); 
                 $adjacencyList = new AdjacencyList();
       		    $adjacencyList->BuildAdjacencyList($Data);
-        		 //for ($i = 0; $i < count($adjacencyList->getAdjacencyList()); $i++){
-             	//	print_r($adjacencyList->getAdjacencyList()[$i]);
-             	//	echo "<br><br>";
-             	//}
-        		//var_dump($adjacencyList->getAdjacencyList()[0]->first);
                 $Graph = new Graph($adjacencyList);
         		$OutputStack = $Graph->TopologicalSort();
 
@@ -76,7 +98,7 @@ include("Algorithm.php");
             }
               ?>            
             
-        <button type="submit" class="btn btn-secondary" name="submit">Save Report</button>
+        <button type="submit" onclick = "/SavedProgressReport.php" class="btn btn-secondary" name="submit">Save Report</button>
     </body>
     
 </html>    
