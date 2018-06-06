@@ -14,41 +14,17 @@
 
         <div class="space"></div>
 
-        <h2>Autumn 2018</h2>
-    
-        <table class='table' border='1'>
-            <tr>
-            <th scope='col'>Course ID</th>
-            <th scope='col'>Subject</th>
-            <th scope='col'>Cat Number</th>
-            <th scope='col'>Title</th>
-            <th scope='col'>Consent</th>
-            <th scope='col'>Subject_Desc</th>
-            <th scope='col'>Location</th>
-            </tr>
-
-            <tr>
-            <td>???</td>
-            <td>???</td>
-            <td>???</td>
-            <td>???</td>
-            <td>???</td>
-            <td>???</td>
-            <td>???</td>
-            </tr>
-    
-        </table>
 
         <h2>Winter 2018</h2>
 
         <table class='table'>
     
         <tr>
-    
-    <td><p class="course-item"> CSC321 </p></td>
-    <td><p class="course-item"> CSC501 </p></td>
-    <td><p class="course-item"> CSC602 </p></td>
-    <td><p class="course-item"> CSC401 </p></td>
+            
+            <td><p class="course-item"> CSC321 </p></td>
+            <td><p class="course-item"> CSC501 </p></td>
+            <td><p class="course-item"> CSC602 </p></td>
+            <td><p class="course-item"> CSC401 </p></td>
         
         </tr>
         

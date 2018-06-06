@@ -10,7 +10,22 @@
 		}
 
 		public function Push($Object){
+			for ($i = 0; $i < $this->Count; $i++){
+				if ($this->Stack[$i] == $Object){
+					return;
+				}			
+			}
 			array_push($this->Stack, $Object);
+			$this->Count++;
+		}
+
+		public function Unshift($Object){
+			for ($i = 0; $i < $this->Count; $i++){
+				if ($this->Stack[$i] == $Object){
+					return;
+				}			
+			}
+			array_unshift($this->Stack, $Object);
 			$this->Count++;
 		}
 

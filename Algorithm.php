@@ -52,31 +52,54 @@
 		public function TopologicalSort(){
 
 			$Visited = array();
-			$Stack = new Stack();
+			$OutputStack = new Stack();
 
-
-			for ($i = 0; $i < $this->Count; $i++){		// Sets all Nodes to not visited
+			// Sets all Nodes to not visited
+			for ($i = 0; $i < $this->Count; $i++){
 				array_push($Visited, 0);
 			}
 
-
-			// Loops throught the first Adjacency Nodes
+			// Finds all the Nodes who have no prereqs and adds them to the output
 			for ($i = 0; $i < $this->Count; $i++){
-
-				if ($Visited[$i] == 0){
-					$this->TopologicalSortHelper($i, $Visited, $Stack);
+				if ($this->AdjacencyList->getAdjacencyList()[$i]->getCount() == 1){
+					$OutputStack->Push($this->AdjacencyList->getAdjacencyList()[$i]->first);
 				}
 			}
 
+			$TracedRouteStack = new Stack();
+			for ($j = 0; $j < $this->Count; $j++){
+				$Node = $this->AdjacencyList->getAdjacencyList()[$j]->first;
+				$TracedRouteStack->Push($this->Find($Node));
+				while ($Node->Next != NULL){
+					$Node = $Node->Next;
+					$TracedRouteStack->Push($this->Find($Node));
+				}
+			}
+
+			$BackTraceRouteStack = new Stack();
+			while (!$TracedRouteStack->isEmpty()){
+				$Node = $this->AdjacencyList->getAdjacencyList()[$TracedRouteStack->Pop()]->first;
+				if ($Node->Next == NULL){
+					$OutputStack->Push($Node);
+					while (!$BackTraceRouteStack->isEmpty()){
+						$BackRouteNode = $this->AdjacencyList->getAdjacencyList()[$BackTraceRouteStack->Pop()]->first;
+						$OutputStack->Push($BackRouteNode);
+					}
+				}
+				if ($Node->Next != null){
+					$BackTraceRouteStack->Unshift($this->Find($Node));
+				}
+			}
 
 			$Numbered = 0;
-			while(!$Stack->isEmpty()){		// Writes the results out to the screen
+			while(!$OutputStack->isEmpty()){		// Writes the results out to the screen
 				echo "". $Numbered. ", ";
-				$Node = $Stack->Pop();
+				$Node = $OutputStack->Pop();
 				echo "". $Node->getCourseID(). ", ". $Node->getCategoryNumber() .", ". $Node->getTitle() .", ";
 				echo "<br><br>";
 				$Numbered++;
 			}
+			return $OutputStack;
 
 		}
 
@@ -90,28 +113,6 @@
 			return -1;
 		}
 
-		// Helper function:
-		// Goes through all the linked nodes, and finds the end of the Prerequisites 
-		public function TopologicalSortHelper($Index, &$Visited, $Stack){
-			$Visited[$Index] = 1;
-
-			$Node = $this->AdjacencyList->getAdjacencyList()[$Index]->first;
-
-			if ($Node->Next == null){
-				$Stack->Push($Node);
-			}
-			else{
-				while (!is_null($Node->Next)){
-					$Node = $Node->Next;
-					$Index = $this->Find($Node);
-					if ($Visited[$Index] !== 1){
-						$this->TopologicalSortHelper($Index, $Visited, $Stack);
-					}
-				}
-			}
-
-
-		}
 
 	}
 

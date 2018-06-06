@@ -41,7 +41,7 @@
 
 		}
 
-		private function QueryingDatabase(){
+		private function QueryingRequirements(){
 			$Major = $this->Student->getMajor();
 			$Concentration = $this->Student->getConcentration();
 			$PreferedLocation = $this->Student->getLocation();
@@ -126,7 +126,7 @@
 
 
 		public function Run(){
-			$Query = $this->QueryingDatabase();
+			$Query = $this->QueryingRequirements();
 			$Result = $this->FetchCourses($Query);
 			return $Result;
 
