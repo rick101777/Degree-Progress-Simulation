@@ -66,7 +66,7 @@
 				else if ($Concentration == "IS: Business Intelligence"){
 					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_BI ON COURSES.COURSE_ID = IS_REQUIREMENTS_BI.CID AND COURSES.LOCATION = '$PreferedLocation' AND IS_REQUIREMENTS_BI.REQUIREMENT = 'R'";
 				}
-				else if ($Concentration == "IS: Database Adminstration"){
+				else if ($Concentration == "IS: Database Administration"){
 					$Query = "SELECT DISTINCT * FROM COURSES INNER JOIN IS_REQUIREMENTS_DA ON COURSES.COURSE_ID = IS_REQUIREMENTS_DA.CID AND COURSES.LOCATION = '$PreferedLocation' AND IS_REQUIREMENTS_DA.REQUIREMENT = 'R'";
 				}
 				else if ($Concentration == "IS: IT Enterprise Management"){
